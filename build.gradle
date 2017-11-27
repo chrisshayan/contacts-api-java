@@ -1,0 +1,29 @@
+// Apply the java plugin to add support for Java
+
+buildscript {
+    // Sets up repositories for the buildscript itself, not the projects
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.25'
+    compile 'com.ning:async-http-client:1.8.15'
+
+    testCompile 'junit:junit:4.12'
+}
+
+
+jar {
+    baseName = 'contacts-api-java'
+    version =  '0.1.0'
+}
