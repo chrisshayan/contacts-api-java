@@ -8,9 +8,20 @@ repositories {
     jcenter()
 }
 
+ext {
+    jacksonVersion = "2.4.4"
+}
+
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.25'
     compile 'com.ning:async-http-client:1.8.15'
+
+    compile("com.fasterxml.jackson.core:jackson-core:$jacksonVersion") { force = true }
+    compile("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion") { force = true }
+    compile("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion") { force = true }
+    compile("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jacksonVersion") { force = true }
+    compile("com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:$jacksonVersion") { force = true }
+    compile("com.fasterxml.jackson.jaxrs:jackson-jaxrs-xml-provider:$jacksonVersion") { force = true }
 
     testCompile 'junit:junit:4.12'
 }
