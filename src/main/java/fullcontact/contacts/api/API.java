@@ -9,6 +9,8 @@ import com.ning.http.client.Response;
 import com.ning.http.client.RequestBuilder;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 
 abstract class API {
@@ -25,8 +27,36 @@ abstract class API {
         this._client = new AsyncHttpClient(new AsyncHttpClientConfig.Builder().setUserAgent(userAgent).build());
     }
 
+    private String encodeString(String v) {
+        try {
+            return URLEncoder.encode(v, "utf8");
+        } catch(UnsupportedEncodingException ex) {
+            return v;
+        }
+    }
+
+    public <T> T request(Class<T> clazz, String accessToken, String method, String uri, HashMap<String,String> form, HashMap<String, String> headers) throws Exception {
+        StringBuilder sb = new StringBuilder();
+
+        form.forEach((k,v) -> sb.append(String.format("%s=%s", k, this.encodeString(v))));
+
+        if(headers == null) {
+            headers = new HashMap<>();
+        }
+
+        headers.put("Content-Type", "application/x-www-form-urlencoded");
+        return request(clazz, accessToken, method, uri, sb.toString().getBytes(), headers);
+    }
+
     public <T> T request(Class<T> clazz, String accessToken, String method, String uri, Object body, HashMap<String, String> headers) throws Exception {
         String json = this._mapper.writeValueAsString(body);
+
+        if(headers == null) {
+            headers = new HashMap<>();
+        }
+
+        headers.put("Content-Type", "application/json");
+
         return request(clazz, accessToken, method, uri, json.getBytes(), headers);
     }
 
