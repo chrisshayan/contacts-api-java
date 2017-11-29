@@ -1,7 +1,9 @@
 // Apply the java plugin to add support for Java
 
-apply plugin: 'java'
-apply plugin: 'maven'
+plugins {
+    id 'io.franzbecker.gradle-lombok' version '1.8'
+    id 'net.ltgt.apt' version '0.10'
+}
 
 repositories {
     mavenCentral()
@@ -12,9 +14,14 @@ ext {
     jacksonVersion = "2.4.4"
 }
 
+apply plugin: 'java'
+apply plugin: 'maven'
+
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.25'
     compile 'com.ning:async-http-client:1.8.15'
+    compileOnly 'org.projectlombok:lombok:1.16.18'
+    apt "org.projectlombok:lombok:1.16.18"
 
     compile("com.fasterxml.jackson.core:jackson-core:$jacksonVersion") { force = true }
     compile("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion") { force = true }
