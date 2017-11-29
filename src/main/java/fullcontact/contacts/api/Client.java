@@ -9,6 +9,7 @@ public class Client {
     private Tags _tags;
     private Teams _teams;
     private Webhooks _webhooks;
+    private Account _account;
 
     public void Client(String clientId, String clientSecret) {
         Client(clientId, clientSecret, null);
@@ -33,6 +34,7 @@ public class Client {
         this._tags = new Tags(this.config);
         this._teams = new Teams(this.config);
         this._webhooks = new Webhooks(this.config);
+        this._account = new Account(this.config);
     }
 
     public Contacts getContacts() {
@@ -54,4 +56,6 @@ public class Client {
     public Webhooks getWebhooks() {
         return this._webhooks;
     }
+
+    public Account getAccount() { return this._account; }
 }
