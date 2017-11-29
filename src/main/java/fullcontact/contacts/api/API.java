@@ -7,6 +7,8 @@ import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.AsyncHttpClientConfig;
 import com.ning.http.client.Response;
 import com.ning.http.client.RequestBuilder;
+
+import java.io.IOException;
 import java.util.HashMap;
 
 abstract class API {
@@ -23,7 +25,12 @@ abstract class API {
         this._client = new AsyncHttpClient(new AsyncHttpClientConfig.Builder().setUserAgent(userAgent).build());
     }
 
-    public JsonNode request(String accessToken, String method, String uri, byte[] body, HashMap<String, String> headers) throws Exception {
+    public <T> T request(Class<T> clazz, String accessToken, String method, String uri, Object body, HashMap<String, String> headers) throws Exception {
+        String json = this._mapper.writeValueAsString(body);
+        return request(clazz, accessToken, method, uri, json.getBytes(), headers);
+    }
+
+    public <T> T request(Class<T> clazz, String accessToken, String method, String uri, byte[] body, HashMap<String, String> headers) throws Exception {
         RequestBuilder builder = new RequestBuilder()
                 .setMethod(method)
                 .setUrl(_baseUrl + uri);
@@ -40,6 +47,6 @@ abstract class API {
 
         Response response = this._client.executeRequest(builder.build()).get();
 
-        return this._mapper.readTree(response.getResponseBody());
+        return this._mapper.readValue(response.getResponseBody(), clazz);
     }
 }
