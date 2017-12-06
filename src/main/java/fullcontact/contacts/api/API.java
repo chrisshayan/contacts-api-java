@@ -12,7 +12,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 
-abstract class API {
+public abstract class API {
     private final HashMap<String,Object> _config;
     private final ObjectMapper _mapper;
     private final AsyncHttpClient _client;
@@ -30,7 +30,7 @@ abstract class API {
         this._client = new AsyncHttpClient(new AsyncHttpClientConfig.Builder().setUserAgent(userAgent).build());
     }
 
-    protected String urlEncode(String v) {
+    public String urlEncode(String v) {
         if(v == null) {
             return null;
         }
@@ -42,7 +42,7 @@ abstract class API {
         }
     }
 
-    protected String toJSON(Object o) throws Exception {
+    public String toJSON(Object o) throws Exception {
         return this._mapper.writeValueAsString(o);
     }
 

@@ -1,6 +1,5 @@
 package fullcontact.contacts.api;
 
-import fullcontact.contacts.api.models.Webhook;
 import fullcontact.contacts.api.requests.APIRequest;
 import fullcontact.contacts.api.requests.webhooks.*;
 import fullcontact.contacts.api.responses.APIResponse;
