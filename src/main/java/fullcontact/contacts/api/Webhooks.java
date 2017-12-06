@@ -63,21 +63,6 @@ public class Webhooks extends API {
                 null
         );
     }
-    \
-    public APIResponse<WebhookResponseBody> create(String accessToken, String url, List<String> triggers, String teamId) throws Exception {
-        CreateWebhookRequest req = new CreateWebhookRequest();
-        req.url = url;
-        req.triggerIds = triggers;
-        req.teamId = teamId;
-        return this.request(
-                WebhookResponseBody.class,
-                accessToken,
-                "POST",
-                "/api/v1/webhooks.create",
-                req.toString(),
-                null
-        );
-    }
 
     public APIResponse<Object> delete(String accessToken, String webhookId, String teamId) throws Exception {
         DeleteWebhookRequest req = new DeleteWebhookRequest();
