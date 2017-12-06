@@ -1,7 +1,6 @@
 package fullcontact.contacts.api;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import fullcontact.contacts.api.models.APIResponse;
+import fullcontact.contacts.api.responses.APIResponse;
 import fullcontact.contacts.api.models.Authorization;
 
 import java.util.HashMap;

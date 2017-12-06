@@ -1,10 +1,8 @@
-package fullcontact.contacts.api.models;
+package fullcontact.contacts.api.responses;
 
 import com.ning.http.client.FluentCaseInsensitiveStringsMap;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.HashMap;
 
 public class APIResponse<T> {
     @Getter @Setter public Integer status;

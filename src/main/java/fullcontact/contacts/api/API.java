@@ -6,7 +6,7 @@ import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.AsyncHttpClientConfig;
 import com.ning.http.client.Response;
 import com.ning.http.client.RequestBuilder;
-import fullcontact.contacts.api.models.APIResponse;
+import fullcontact.contacts.api.responses.APIResponse;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -42,6 +42,10 @@ abstract class API {
         }
     }
 
+    protected String toJSON(Object o) throws Exception {
+        return this._mapper.writeValueAsString(o);
+    }
+
     public <T> APIResponse<T> request(Class<T> clazz, String accessToken, String method, String uri, HashMap<String,String> form, HashMap<String, String> headers) throws Exception {
         StringBuilder sb = new StringBuilder();
 
@@ -56,7 +60,7 @@ abstract class API {
     }
 
     public <T> APIResponse<T> request(Class<T> clazz, String accessToken, String method, String uri, Object body, HashMap<String, String> headers) throws Exception {
-        String json = this._mapper.writeValueAsString(body);
+        String json = this.toJSON(body);
 
         if(headers == null) {
             headers = new HashMap<>();

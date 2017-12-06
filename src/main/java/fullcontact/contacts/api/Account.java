@@ -1,6 +1,6 @@
 package fullcontact.contacts.api;
 
-import fullcontact.contacts.api.models.APIResponse;
+import fullcontact.contacts.api.responses.APIResponse;
 
 import java.util.HashMap;
 
@@ -14,7 +14,7 @@ public class Account extends API {
             fullcontact.contacts.api.models.Account.class,
             accessToken,
             "POST",
-            "/api/v1/account,get",
+            "/api/v1/account.get",
             "".getBytes(),
             null
         );
