@@ -1,11 +1,10 @@
 package fullcontact.contacts.api;
 
-import fullcontact.contacts.api.requests.contacts.GetContactsRequest;
-import fullcontact.contacts.api.requests.contacts.ScrollContactsRequest;
-import fullcontact.contacts.api.requests.contacts.SearchContactsRequest;
+import fullcontact.contacts.api.requests.contacts.*;
 import fullcontact.contacts.api.responses.APIResponse;
 import fullcontact.contacts.api.models.Contact;
 import fullcontact.contacts.api.responses.CursorResponseBody;
+import fullcontact.contacts.api.responses.contacts.ContactResponseBody;
 import fullcontact.contacts.api.responses.contacts.ContactsResponseBody;
 
 import java.util.HashMap;
@@ -74,6 +73,65 @@ public class Contacts extends API {
                 accessToken,
                 "POST",
                 "/api/v1/contacts.search",
+                req.toString(),
+                null
+        );
+    }
+
+    public APIResponse<ContactResponseBody> create(String accessToken, Contact contact, String teamId) throws Exception {
+        CreateContactRequest req = new CreateContactRequest();
+        req.contact = contact;
+        req.teamId = teamId;
+        return this.request(
+                ContactResponseBody.class,
+                accessToken,
+                "POST",
+                "/api/v1/contacts.create",
+                req.toString(),
+                null
+        );
+    }
+
+    public APIResponse<ContactResponseBody> update(String accessToken, Contact contact, String teamId) throws Exception {
+        UpdateContactRequest req = new UpdateContactRequest();
+        req.contact = contact;
+        req.teamId = teamId;
+        return this.request(
+                ContactResponseBody.class,
+                accessToken,
+                "POST",
+                "/api/v1/contacts.update",
+                req.toString(),
+                null
+        );
+    }
+
+    public APIResponse<Object> manageTags(String accessToken, List<String> contactIds, List<String> addTagIds, List<String> removeTagIds, String teamId) throws Exception {
+        ManageTagsRequest req = new ManageTagsRequest();
+        req.teamId = teamId;
+        req.contactIds = contactIds;
+        req.addTagIds = addTagIds;
+        req.removeTagIds = removeTagIds;
+        return this.request(
+                Object.class,
+                accessToken,
+                "POST",
+                "/api/v1/contacts.manageTags",
+                req.toString(),
+                null
+        );
+    }
+
+    public APIResponse<Object> delete(String accessToken, String contactId, String etag, String teamId) throws Exception {
+        DeleteContactRequest req = new DeleteContactRequest();
+        req.teamId = teamId;
+        req.contactId = contactId;
+        req.etag = etag;
+        return this.request(
+                Object.class,
+                accessToken,
+                "POST",
+                "/api/v1/contacts.delete",
                 req.toString(),
                 null
         );
