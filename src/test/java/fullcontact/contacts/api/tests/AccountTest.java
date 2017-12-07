@@ -18,7 +18,7 @@ public class AccountTest extends APITestBase {
         this.expect(req);
         APIResponse res = this.api.get(accessToken);
         Assert.assertEquals(res.status, (Integer) 200);
-        Assert.assertEquals(req.toString(), res.req.toString());
+        this.verifyRequest(req, res);
         this.validate();
     }
 }

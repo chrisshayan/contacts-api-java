@@ -1,6 +1,8 @@
 package fullcontact.contacts.api.tests;
 
 import com.ning.http.client.*;
+import fullcontact.contacts.api.responses.APIResponse;
+import org.junit.Assert;
 
 import java.util.HashMap;
 
@@ -74,7 +76,9 @@ public class APITestBase {
         verify(this.client, times(times)).executeRequest(any(Request.class));
     }
 
-
+    protected void verifyRequest(Request req, APIResponse res) {
+        Assert.assertEquals(res.req.toString(), req.toString());
+    }
 }
 
 
