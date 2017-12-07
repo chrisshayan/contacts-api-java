@@ -54,12 +54,24 @@ public class APITestBase {
                 .thenReturn(this.getMockResponse());
     }
 
-    protected AsyncHttpClient validate() {
-        return validate(1);
+    protected void expect(Request req, Integer status, String body, HashMap<String,String> headers) throws Exception {
+
+        if(body == null) {
+            body = "{}";
+        }
+
+        when(this.client.executeRequest(
+                any(Request.class)
+        ))
+                .thenReturn(this.getMockResponse(status, body, headers));
     }
 
-    protected AsyncHttpClient validate(Integer times) {
-        return verify(this.client, times(times));
+    protected void validate() throws Exception {
+        validate(1);
+    }
+
+    protected void validate(Integer times) throws Exception {
+        verify(this.client, times(times)).executeRequest(any(Request.class));
     }
 
 

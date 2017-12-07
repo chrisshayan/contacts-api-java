@@ -2,10 +2,7 @@ package fullcontact.contacts.api;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ning.http.client.AsyncHttpClient;
-import com.ning.http.client.AsyncHttpClientConfig;
-import com.ning.http.client.Response;
-import com.ning.http.client.RequestBuilder;
+import com.ning.http.client.*;
 import fullcontact.contacts.api.responses.APIResponse;
 
 import java.io.UnsupportedEncodingException;
@@ -98,9 +95,11 @@ public abstract class API {
             builder.addHeader("Authorization", "Bearer " + accessToken);
         }
 
-        Response response = this._client.executeRequest(builder.build()).get();
+        Request req = builder.build();
+        Response response = this._client.executeRequest(req).get();
 
         APIResponse res = new APIResponse();
+        res.req = req;
         res.body = this._mapper.readValue(response.getResponseBody(), clazz);
         res.status = response.getStatusCode();
         res.headers = response.getHeaders();

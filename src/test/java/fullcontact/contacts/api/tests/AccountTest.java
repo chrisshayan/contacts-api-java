@@ -1,12 +1,9 @@
 package fullcontact.contacts.api.tests;
 import com.ning.http.client.Request;
-import com.ning.http.client.Response;
 import fullcontact.contacts.api.Account;
 import fullcontact.contacts.api.responses.APIResponse;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.mockito.ArgumentMatchers.any;
 
 public class AccountTest extends APITestBase {
     private final Account api;
@@ -21,6 +18,7 @@ public class AccountTest extends APITestBase {
         this.expect(req);
         APIResponse res = this.api.get(accessToken);
         Assert.assertEquals(res.status, (Integer) 200);
-        this.validate().executeRequest(any(Request.class));
+        Assert.assertEquals(req.toString(), res.req.toString());
+        this.validate();
     }
 }
