@@ -1,5 +1,6 @@
 package fullcontact.contacts.api;
 
+import com.ning.http.client.AsyncHttpClient;
 import fullcontact.contacts.api.requests.contacts.*;
 import fullcontact.contacts.api.responses.APIResponse;
 import fullcontact.contacts.api.models.Contact;
@@ -14,6 +15,9 @@ public class Contacts extends API {
 
     public Contacts(HashMap<String, Object> config) {
         super(config);
+    }
+    public Contacts(HashMap<String, Object> config, AsyncHttpClient client) {
+        super(config, client);
     }
 
     public APIResponse<ContactsResponseBody> get(String accessToken, List<String> contactIds, String teamId) throws Exception {

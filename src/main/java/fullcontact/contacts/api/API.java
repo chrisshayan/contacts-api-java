@@ -21,13 +21,23 @@ public abstract class API {
     protected final String _clientSecret;
 
     public API(HashMap<String, Object> config) {
-        String userAgent = (String) config.get("userAgent");
+        this(
+                config,
+                new AsyncHttpClient(
+                        new AsyncHttpClientConfig.Builder()
+                                .setUserAgent((String) config.get("userAgent"))
+                                .build()
+                )
+        );
+    }
+
+    public API(HashMap<String, Object> config, AsyncHttpClient client) {
         this._config = config;
         this._baseUrl = (String) config.get("apiUrl");
         this._clientId = (String) config.get("clientId");
         this._clientSecret = (String) config.get("clientSecret");
         this._mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        this._client = new AsyncHttpClient(new AsyncHttpClientConfig.Builder().setUserAgent(userAgent).build());
+        this._client = client;
     }
 
     public String urlEncode(String v) {
@@ -84,7 +94,9 @@ public abstract class API {
             headers.forEach(builder::addHeader);
         }
 
-        builder.addHeader("Authorization", "Bearer " + accessToken);
+        if(accessToken !=  null) {
+            builder.addHeader("Authorization", "Bearer " + accessToken);
+        }
 
         Response response = this._client.executeRequest(builder.build()).get();
 

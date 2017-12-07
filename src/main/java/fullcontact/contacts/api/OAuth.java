@@ -1,5 +1,6 @@
 package fullcontact.contacts.api;
 
+import com.ning.http.client.AsyncHttpClient;
 import fullcontact.contacts.api.responses.APIResponse;
 import fullcontact.contacts.api.models.Authorization;
 
@@ -9,6 +10,9 @@ import java.util.List;
 public class OAuth extends API {
     public OAuth(HashMap<String, Object> config) {
         super(config);
+    }
+    public OAuth(HashMap<String, Object> config, AsyncHttpClient client) {
+        super(config, client);
     }
 
     public String getAuthorizationUrl(List<String> scopes, String redirectUri, String state) {

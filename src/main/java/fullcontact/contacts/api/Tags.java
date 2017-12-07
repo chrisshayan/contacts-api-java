@@ -1,5 +1,6 @@
 package fullcontact.contacts.api;
 
+import com.ning.http.client.AsyncHttpClient;
 import fullcontact.contacts.api.models.Tag;
 import fullcontact.contacts.api.requests.tags.*;
 import fullcontact.contacts.api.responses.APIResponse;
@@ -13,6 +14,9 @@ public class Tags extends API {
 
     public Tags(HashMap<String, Object> config) {
         super(config);
+    }
+    public Tags(HashMap<String, Object> config, AsyncHttpClient client) {
+        super(config, client);
     }
 
     public APIResponse<TagsResponseBody> get(String accessToken, List<String> tagIds, String teamId) throws Exception {

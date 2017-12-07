@@ -1,5 +1,6 @@
 package fullcontact.contacts.api;
 
+import com.ning.http.client.AsyncHttpClient;
 import fullcontact.contacts.api.requests.APIRequest;
 import fullcontact.contacts.api.requests.webhooks.*;
 import fullcontact.contacts.api.responses.APIResponse;
@@ -15,6 +16,9 @@ public class Webhooks extends API {
 
     public Webhooks(HashMap<String, Object> config) {
         super(config);
+    }
+    public Webhooks(HashMap<String, Object> config, AsyncHttpClient client) {
+        super(config, client);
     }
 
     public APIResponse<WebhooksResponseBody> get(String accessToken, List<String> webhookIds, Integer page, String teamId) throws Exception {
