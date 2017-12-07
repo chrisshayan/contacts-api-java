@@ -8,6 +8,7 @@ import org.junit.Assert;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.UUID;
 
 import static org.mockito.Mockito.*;
 
@@ -29,6 +30,10 @@ public class APITestBase {
         } catch (Exception ex) {
             return null;
         }
+    }
+
+    protected String randomString() {
+        return UUID.randomUUID().toString();
     }
 
     protected String getApiUrl() {

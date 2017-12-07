@@ -14,7 +14,7 @@ public class TeamsTest extends APITestBase {
     }
 
     @Test public void test_get() throws Exception {
-        String accessToken = "Test-Token";
+        String accessToken = this.randomString();
         Request req = this.buildRequest(accessToken, "POST", "/api/v1/teams.get", "{}");
         this.expect(req);
         APIResponse res = this.api.get(accessToken);
