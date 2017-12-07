@@ -29,7 +29,7 @@ public class Contacts extends API {
                 accessToken,
                 "POST",
                 "/api/v1/contacts.get",
-                req.toString(),
+                req,
                 null
         );
     }
@@ -53,7 +53,7 @@ public class Contacts extends API {
                 accessToken,
                 "POST",
                 "/api/v1/contacts.scroll",
-                req.toString(),
+                req,
                 null
         );
     }
@@ -77,7 +77,7 @@ public class Contacts extends API {
                 accessToken,
                 "POST",
                 "/api/v1/contacts.search",
-                req.toString(),
+                req,
                 null
         );
     }
@@ -91,7 +91,7 @@ public class Contacts extends API {
                 accessToken,
                 "POST",
                 "/api/v1/contacts.create",
-                req.toString(),
+                req,
                 null
         );
     }
@@ -105,7 +105,7 @@ public class Contacts extends API {
                 accessToken,
                 "POST",
                 "/api/v1/contacts.update",
-                req.toString(),
+                req,
                 null
         );
     }
@@ -121,7 +121,7 @@ public class Contacts extends API {
                 accessToken,
                 "POST",
                 "/api/v1/contacts.manageTags",
-                req.toString(),
+                req,
                 null
         );
     }
@@ -136,7 +136,7 @@ public class Contacts extends API {
                 accessToken,
                 "POST",
                 "/api/v1/contacts.delete",
-                req.toString(),
+                req,
                 null
         );
     }

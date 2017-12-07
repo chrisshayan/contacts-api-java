@@ -1,4 +1,5 @@
 package fullcontact.contacts.api.requests;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
@@ -12,7 +13,7 @@ public class APIRequest {
         this._mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
-    @Getter @Setter public String teamId;
+    @JsonInclude(JsonInclude.Include.NON_NULL) @Getter @Setter public String teamId;
 
 
     protected String toJSON(Object o) {

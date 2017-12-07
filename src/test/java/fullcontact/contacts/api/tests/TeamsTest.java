@@ -20,6 +20,5 @@ public class TeamsTest extends APITestBase {
         APIResponse res = this.api.get(accessToken);
         Assert.assertEquals(res.status, (Integer) 200);
         this.verifyRequest(req, res);
-        this.validate();
     }
 }

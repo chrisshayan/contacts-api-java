@@ -31,7 +31,7 @@ public class Webhooks extends API {
                 accessToken,
                 "POST",
                 "/api/v1/webhooks.get",
-                req.toString(),
+                req,
                 null
         );
     }
@@ -47,7 +47,7 @@ public class Webhooks extends API {
                 accessToken,
                 "POST",
                 "/api/v1/webhooks.search",
-                req.toString(),
+                req,
                 null
         );
     }
@@ -62,7 +62,7 @@ public class Webhooks extends API {
                 accessToken,
                 "POST",
                 "/api/v1/webhooks.create",
-                req.toString(),
+                req,
                 null
         );
     }
@@ -76,7 +76,7 @@ public class Webhooks extends API {
                 accessToken,
                 "POST",
                 "/api/v1/webhooks.delete",
-                req.toString(),
+                req,
                 null
         );
     }
@@ -91,7 +91,7 @@ public class Webhooks extends API {
                 accessToken,
                 "POST",
                 "/api/v1/webhooks.getBatches",
-                req.toString(),
+                req,
                 null
         );
     }

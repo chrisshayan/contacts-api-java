@@ -63,7 +63,7 @@ public abstract class API {
         }
 
         headers.put("Content-Type", "application/x-www-form-urlencoded");
-        return request(clazz, accessToken, method, uri, sb.toString().getBytes(), headers);
+        return request(clazz, accessToken, method, uri, sb.toString(), headers);
     }
 
     public <T> APIResponse<T> request(Class<T> clazz, String accessToken, String method, String uri, Object body, HashMap<String, String> headers) throws Exception {
@@ -75,10 +75,10 @@ public abstract class API {
 
         headers.put("Content-Type", "application/json");
 
-        return request(clazz, accessToken, method, uri, json.getBytes(), headers);
+        return request(clazz, accessToken, method, uri, json, headers);
     }
 
-    public <T> APIResponse<T> request(Class<T> clazz, String accessToken, String method, String uri, byte[] body, HashMap<String, String> headers) throws Exception {
+    public <T> APIResponse<T> request(Class<T> clazz, String accessToken, String method, String uri, String body, HashMap<String, String> headers) throws Exception {
         RequestBuilder builder = new RequestBuilder()
                 .setMethod(method)
                 .setUrl(_baseUrl + uri);
@@ -91,7 +91,7 @@ public abstract class API {
             headers.forEach(builder::addHeader);
         }
 
-        if(accessToken !=  null) {
+        if(accessToken != null) {
             builder.addHeader("Authorization", "Bearer " + accessToken);
         }
 

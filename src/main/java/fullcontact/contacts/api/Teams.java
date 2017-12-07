@@ -21,7 +21,7 @@ public class Teams extends API {
                 accessToken,
                 "POST",
                 "/api/v1/teams.get",
-                new APIRequest().toString(),
+                new APIRequest(),
                 null
         );
     }

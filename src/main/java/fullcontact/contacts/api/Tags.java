@@ -28,7 +28,7 @@ public class Tags extends API {
                 accessToken,
                 "POST",
                 "/api/v1/tags.get",
-                req.toString(),
+                req,
                 null
         );
     }
@@ -52,7 +52,7 @@ public class Tags extends API {
                 accessToken,
                 "POST",
                 "/api/v1/tags.scroll",
-                req.toString(),
+                req,
                 null
         );
     }
@@ -66,7 +66,7 @@ public class Tags extends API {
                 accessToken,
                 "POST",
                 "/api/v1/tags.create",
-                req.toString(),
+                req,
                 null
         );
     }
@@ -80,7 +80,7 @@ public class Tags extends API {
                 accessToken,
                 "POST",
                 "/api/v1/tags.update",
-                req.toString(),
+                req,
                 null
         );
     }
@@ -95,7 +95,7 @@ public class Tags extends API {
                 accessToken,
                 "POST",
                 "/api/v1/tags.delete",
-                req.toString(),
+                req,
                 null
         );
     }

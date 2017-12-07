@@ -1,9 +1,12 @@
 package fullcontact.contacts.api.tests;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ning.http.client.*;
 import fullcontact.contacts.api.responses.APIResponse;
 import org.junit.Assert;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import static org.mockito.Mockito.*;
@@ -11,11 +14,21 @@ import static org.mockito.Mockito.*;
 public class APITestBase {
     protected final AsyncHttpClient client;
     protected final HashMap<String,Object> config;
+    private final ObjectMapper mapper;
 
     public APITestBase() {
         this.config = new HashMap<>();
         this.config.put("apiUrl", this.getApiUrl());
         this.client = mock(AsyncHttpClient.class);
+        this.mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    }
+
+    protected String toJSON(Object obj) {
+        try {
+            return this.mapper.writeValueAsString(obj);
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     protected String getApiUrl() {
@@ -68,16 +81,14 @@ public class APITestBase {
                 .thenReturn(this.getMockResponse(status, body, headers));
     }
 
-    protected void validate() throws Exception {
-        validate(1);
-    }
 
-    protected void validate(Integer times) throws Exception {
-        verify(this.client, times(times)).executeRequest(any(Request.class));
-    }
-
-    protected void verifyRequest(Request req, APIResponse res) {
-        Assert.assertEquals(res.req.toString(), req.toString());
+    protected void verifyRequest(Request req, APIResponse res) throws IOException {
+        verify(this.client, times(1)).executeRequest(any(Request.class));
+        Assert.assertEquals(res.req.getUrl(), req.getUrl());
+        Assert.assertEquals(res.req.getMethod(), req.getMethod());
+        Assert.assertEquals(res.req.getStringData(), req.getStringData());
+        Assert.assertEquals(res.req.getHeaders().size(), req.getHeaders().size());
+        res.req.getHeaders().forEach((k,v) -> Assert.assertTrue(req.getHeaders().get(k).equals(v)));
     }
 }
 

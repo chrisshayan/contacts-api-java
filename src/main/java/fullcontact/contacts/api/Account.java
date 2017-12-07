@@ -20,7 +20,7 @@ public class Account extends API {
             accessToken,
             "POST",
             "/api/v1/account.get",
-                new APIRequest().toString(),
+                new APIRequest(),
             null
         );
     }
