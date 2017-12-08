@@ -14,6 +14,7 @@ public class ContactData {
     @Getter @Setter public Name name;
     @Getter @Setter public List<StandardField> relatedPeople;
     @Getter @Setter public List<Organization> organizations;
+    @Getter @Setter public List<StandardField> phoneNumbers;
     @Getter @Setter public List<URLField> urls;
     @Getter @Setter public String notes;
     @Getter @Setter public List<StandardField> ims;
