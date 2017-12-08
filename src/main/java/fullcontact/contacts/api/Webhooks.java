@@ -1,5 +1,6 @@
 package fullcontact.contacts.api;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.ning.http.client.AsyncHttpClient;
 import fullcontact.contacts.api.requests.APIRequest;
 import fullcontact.contacts.api.requests.webhooks.*;
@@ -67,12 +68,12 @@ public class Webhooks extends API {
         );
     }
 
-    public APIResponse<Object> delete(String accessToken, String webhookId, String teamId) throws Exception {
+    public APIResponse<JsonNode> delete(String accessToken, String webhookId, String teamId) throws Exception {
         DeleteWebhookRequest req = new DeleteWebhookRequest();
         req.webhookId = webhookId;
         req.teamId = teamId;
         return this.request(
-                Object.class,
+                JsonNode.class,
                 accessToken,
                 "POST",
                 "/api/v1/webhooks.delete",
@@ -102,7 +103,7 @@ public class Webhooks extends API {
                 accessToken,
                 "POST",
                 "/api/v1/webhooks.getTriggers",
-                new APIRequest().toString(),
+                new APIRequest(),
                 null
         );
     }

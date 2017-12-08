@@ -1,5 +1,6 @@
 package fullcontact.contacts.api;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.ning.http.client.AsyncHttpClient;
 import fullcontact.contacts.api.requests.contacts.*;
 import fullcontact.contacts.api.responses.APIResponse;
@@ -59,7 +60,7 @@ public class Contacts extends API {
     }
 
     public APIResponse<ContactsResponseBody> search(String accessToken, String query, String teamId) throws Exception {
-        return search(accessToken, query, teamId, null, null);
+        return search(accessToken, query, null, teamId, null);
     }
 
     public APIResponse<ContactsResponseBody> search(String accessToken, String query, String cursor, String teamId) throws Exception {
@@ -110,14 +111,14 @@ public class Contacts extends API {
         );
     }
 
-    public APIResponse<Object> manageTags(String accessToken, List<String> contactIds, List<String> addTagIds, List<String> removeTagIds, String teamId) throws Exception {
+    public APIResponse<JsonNode> manageTags(String accessToken, List<String> contactIds, List<String> addTagIds, List<String> removeTagIds, String teamId) throws Exception {
         ManageTagsRequest req = new ManageTagsRequest();
         req.teamId = teamId;
         req.contactIds = contactIds;
         req.addTagIds = addTagIds;
         req.removeTagIds = removeTagIds;
         return this.request(
-                Object.class,
+                JsonNode.class,
                 accessToken,
                 "POST",
                 "/api/v1/contacts.manageTags",
@@ -126,13 +127,13 @@ public class Contacts extends API {
         );
     }
 
-    public APIResponse<Object> delete(String accessToken, String contactId, String etag, String teamId) throws Exception {
+    public APIResponse<JsonNode> delete(String accessToken, String contactId, String etag, String teamId) throws Exception {
         DeleteContactRequest req = new DeleteContactRequest();
         req.teamId = teamId;
         req.contactId = contactId;
         req.etag = etag;
         return this.request(
-                Object.class,
+                JsonNode.class,
                 accessToken,
                 "POST",
                 "/api/v1/contacts.delete",

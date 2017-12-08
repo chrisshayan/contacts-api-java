@@ -1,5 +1,6 @@
 package fullcontact.contacts.api;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.ning.http.client.AsyncHttpClient;
 import fullcontact.contacts.api.models.Tag;
 import fullcontact.contacts.api.requests.tags.*;
@@ -85,13 +86,13 @@ public class Tags extends API {
         );
     }
 
-    public APIResponse<Object> delete(String accessToken, String tagId, String etag, String teamId) throws Exception {
+    public APIResponse<JsonNode> delete(String accessToken, String tagId, String etag, String teamId) throws Exception {
         DeleteTagRequest req = new DeleteTagRequest();
         req.tagId = tagId;
         req.etag = etag;
         req.teamId = teamId;
         return this.request(
-                Object.class,
+                JsonNode.class,
                 accessToken,
                 "POST",
                 "/api/v1/tags.delete",

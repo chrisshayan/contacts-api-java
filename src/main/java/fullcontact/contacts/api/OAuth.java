@@ -1,5 +1,6 @@
 package fullcontact.contacts.api;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.ning.http.client.AsyncHttpClient;
 import fullcontact.contacts.api.responses.APIResponse;
 import fullcontact.contacts.api.models.Authorization;
@@ -59,19 +60,17 @@ public class OAuth extends API {
         );
     }
 
-    public Integer verifyAccessToken(String accessToken) throws Exception {
+    public APIResponse<JsonNode> verifyAccessToken(String accessToken) throws Exception {
         HashMap<String,String> params = new HashMap<>();
         params.put("access_token", accessToken);
 
-        APIResponse res = super.request(
-                Object.class,
+        return super.request(
+                JsonNode.class,
                 null,
                 "POST",
-                "/api/v1/oauth.exchangeAuthCode",
+                "/api/v1/oauth.verifyAccessToken",
                 params,
                 null
         );
-
-        return res.status;
     }
 }

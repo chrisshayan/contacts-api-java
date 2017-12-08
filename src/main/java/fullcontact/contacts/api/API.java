@@ -53,17 +53,19 @@ public abstract class API {
         return this._mapper.writeValueAsString(o);
     }
 
-    public <T> APIResponse<T> request(Class<T> clazz, String accessToken, String method, String uri, HashMap<String,String> form, HashMap<String, String> headers) throws Exception {
+    public String toFormData(HashMap<String, String> form) {
         StringBuilder sb = new StringBuilder();
-
         form.forEach((k,v) -> sb.append(String.format("%s=%s", k, this.urlEncode(v))));
+        return sb.toString();
+    }
 
+    public <T> APIResponse<T> request(Class<T> clazz, String accessToken, String method, String uri, HashMap<String,String> form, HashMap<String, String> headers) throws Exception {
         if(headers == null) {
             headers = new HashMap<>();
         }
 
         headers.put("Content-Type", "application/x-www-form-urlencoded");
-        return request(clazz, accessToken, method, uri, sb.toString(), headers);
+        return request(clazz, accessToken, method, uri, this.toFormData(form), headers);
     }
 
     public <T> APIResponse<T> request(Class<T> clazz, String accessToken, String method, String uri, Object body, HashMap<String, String> headers) throws Exception {
