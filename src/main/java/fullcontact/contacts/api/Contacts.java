@@ -5,7 +5,6 @@ import com.ning.http.client.AsyncHttpClient;
 import fullcontact.contacts.api.requests.contacts.*;
 import fullcontact.contacts.api.responses.APIResponse;
 import fullcontact.contacts.api.models.Contact;
-import fullcontact.contacts.api.responses.CursorResponseBody;
 import fullcontact.contacts.api.responses.contacts.ContactResponseBody;
 import fullcontact.contacts.api.responses.contacts.ContactsResponseBody;
 

@@ -1,8 +1,12 @@
 package fullcontact.contacts.api.responses.contacts;
 
 import fullcontact.contacts.api.models.Contact;
-import fullcontact.contacts.api.responses.CursorResponseBody;
+import lombok.Getter;
+import lombok.Setter;
 
-public class ContactsResponseBody extends CursorResponseBody<Contact> {
+import java.util.List;
 
+public class ContactsResponseBody {
+    @Getter @Setter public List<Contact> contacts;
+    @Getter @Setter public String cursor;
 }
