@@ -1,8 +1,16 @@
-// Apply the java plugin to add support for Java
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+    }
+}
 
 plugins {
     id 'io.franzbecker.gradle-lombok' version '1.8'
     id 'net.ltgt.apt' version '0.10'
+    id "com.jfrog.bintray" version "1.7.3"
 }
 
 repositories {
@@ -16,6 +24,9 @@ ext {
 
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'java-library'
 
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.25'
@@ -35,7 +46,37 @@ dependencies {
 }
 
 
+
 jar {
     baseName = 'contacts-api-java'
-    version =  '0.1.0'
+    version =  '1.0.0'
+}
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    publications = ['SDK']
+    pkg {
+        repo = 'fullcontact-oss'
+        name = 'contacts-api-java'
+        version {
+            name = '1.0.0'
+            released  = new Date()
+        }
+    }
+}
+
+publishing {
+    publications {
+        SDK(MavenPublication) {
+            from components.java
+            groupId 'com.fullcontact'
+            artifactId 'contacts-api-java'
+            version '1.0.0'
+        }
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.4'
 }
