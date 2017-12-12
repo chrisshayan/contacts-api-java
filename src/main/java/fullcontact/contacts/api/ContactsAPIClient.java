@@ -2,7 +2,7 @@ package fullcontact.contacts.api;
 
 import java.util.HashMap;
 
-public class Client {
+public class ContactsAPIClient {
     private HashMap<String, Object> config;
     private Contacts _contacts;
     private OAuth _oauth;
@@ -11,11 +11,11 @@ public class Client {
     private Webhooks _webhooks;
     private Account _account;
 
-    public void Client(String clientId, String clientSecret) {
-        Client(clientId, clientSecret, null);
+    public void ContactsAPIClient(String clientId, String clientSecret) {
+        ContactsAPIClient(clientId, clientSecret, null);
     }
 
-    public void Client(String clientId, String clientSecret, HashMap<String, Object> options) {
+    public void ContactsAPIClient(String clientId, String clientSecret, HashMap<String, Object> options) {
         this.config = options == null ? new HashMap<>() : options;
 
         this.config.put("clientId", clientId);
