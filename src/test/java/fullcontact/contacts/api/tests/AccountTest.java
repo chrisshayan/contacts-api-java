@@ -1,5 +1,6 @@
 package fullcontact.contacts.api.tests;
-import com.ning.http.client.Request;
+import fullcontact.contacts.api.responses.account.AccountResponseBody;
+import org.asynchttpclient.*;
 import fullcontact.contacts.api.Account;
 import fullcontact.contacts.api.responses.APIResponse;
 import org.junit.Assert;

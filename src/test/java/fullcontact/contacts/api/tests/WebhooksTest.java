@@ -1,6 +1,6 @@
 package fullcontact.contacts.api.tests;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.ning.http.client.Request;
+import org.asynchttpclient.*;
 import fullcontact.contacts.api.Webhooks;
 import fullcontact.contacts.api.requests.APIRequest;
 import fullcontact.contacts.api.requests.webhooks.*;

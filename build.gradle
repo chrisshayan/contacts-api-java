@@ -30,7 +30,7 @@ apply plugin: 'java-library'
 
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.25'
-    compile 'com.ning:async-http-client:1.8.15'
+    compile 'org.asynchttpclient:async-http-client:2.0.38'
     compileOnly 'org.projectlombok:lombok:1.16.18'
     apt "org.projectlombok:lombok:1.16.18"
 
@@ -74,6 +74,13 @@ publishing {
             artifactId 'contacts-api-java'
             version '1.0.1'
         }
+    }
+}
+
+test {
+    testLogging {
+        outputs.upToDateWhen {false}
+        showStandardStreams = true
     }
 }
 

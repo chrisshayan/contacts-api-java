@@ -2,7 +2,7 @@ package fullcontact.contacts.api.tests;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ning.http.client.*;
+import org.asynchttpclient.*;
 import fullcontact.contacts.api.responses.APIResponse;
 import org.junit.Assert;
 
@@ -92,8 +92,7 @@ public class APITestBase {
         Assert.assertEquals(res.req.getUrl(), req.getUrl());
         Assert.assertEquals(res.req.getMethod(), req.getMethod());
         Assert.assertEquals(res.req.getStringData(), req.getStringData());
-        Assert.assertEquals(res.req.getHeaders().size(), req.getHeaders().size());
-        res.req.getHeaders().forEach((k,v) -> Assert.assertTrue(req.getHeaders().get(k).equals(v)));
+        res.req.getHeaders().entries().forEach(e -> Assert.assertTrue(req.getHeaders().get(e.getKey()).equals(e.getValue())));
     }
 }
 

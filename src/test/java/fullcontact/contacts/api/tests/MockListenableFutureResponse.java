@@ -1,17 +1,11 @@
 package fullcontact.contacts.api.tests;
 
-import com.ning.http.client.FluentCaseInsensitiveStringsMap;
-import com.ning.http.client.ListenableFuture;
-import com.ning.http.client.Response;
-
-import java.io.IOException;
+import io.netty.handler.codec.http.HttpHeaders;
+import org.asynchttpclient.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+import java.util.concurrent.*;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -43,27 +37,17 @@ public class MockListenableFutureResponse implements ListenableFuture<Response> 
     }
 
     @Override
-    public void content(Response response) {
-
-    }
-
-    @Override
     public void touch() {
 
     }
 
     @Override
-    public boolean getAndSetWriteHeaders(boolean writeHeader) {
-        return false;
-    }
-
-    @Override
-    public boolean getAndSetWriteBody(boolean writeBody) {
-        return false;
-    }
-
-    @Override
     public ListenableFuture<Response> addListener(Runnable listener, Executor exec) {
+        return null;
+    }
+
+    @Override
+    public CompletableFuture<Response> toCompletableFuture() {
         return null;
     }
 
@@ -87,19 +71,15 @@ public class MockListenableFutureResponse implements ListenableFuture<Response> 
         Response res = mock(Response.class);
         when(res.getStatusCode()).thenReturn(this.status);
 
-        try {
-            when(res.getResponseBody()).thenReturn(this.body);
-        } catch(IOException ex) {
+        when(res.getResponseBody()).thenReturn(this.body);
 
-        }
-
-        FluentCaseInsensitiveStringsMap h = new FluentCaseInsensitiveStringsMap();
+        HttpHeaders h = HttpHeaders.EMPTY_HEADERS;
 
         if(this.headers != null) {
             this.headers.forEach((k,v) -> {
                 List<String> values = new ArrayList<String>();
                 values.add(v);
-                h.put(k, values);
+                h.add(k, values);
             });
         }
 

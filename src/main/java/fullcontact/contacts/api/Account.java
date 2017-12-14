@@ -1,6 +1,7 @@
 package fullcontact.contacts.api;
 
-import com.ning.http.client.AsyncHttpClient;
+import fullcontact.contacts.api.responses.account.AccountResponseBody;
+import org.asynchttpclient.*;
 import fullcontact.contacts.api.requests.APIRequest;
 import fullcontact.contacts.api.responses.APIResponse;
 
@@ -20,9 +21,9 @@ public class Account extends API {
      * @return
      * @throws Exception
      */
-    public APIResponse<fullcontact.contacts.api.models.Account> get(String accessToken) throws Exception {
+    public APIResponse<AccountResponseBody> get(String accessToken) throws Exception {
         return this.request(
-            fullcontact.contacts.api.models.Account.class,
+            AccountResponseBody.class,
             accessToken,
             "POST",
             "/api/v1/account.get",

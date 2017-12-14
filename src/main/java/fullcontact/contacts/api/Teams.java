@@ -1,6 +1,6 @@
 package fullcontact.contacts.api;
 
-import com.ning.http.client.AsyncHttpClient;
+import org.asynchttpclient.*;
 import fullcontact.contacts.api.requests.APIRequest;
 import fullcontact.contacts.api.responses.APIResponse;
 import fullcontact.contacts.api.responses.teams.TeamsResponseBody;

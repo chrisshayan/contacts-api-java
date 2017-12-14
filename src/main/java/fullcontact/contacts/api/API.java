@@ -2,7 +2,7 @@ package fullcontact.contacts.api;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ning.http.client.*;
+import org.asynchttpclient.*;
 import fullcontact.contacts.api.responses.APIResponse;
 
 import java.io.UnsupportedEncodingException;
@@ -20,8 +20,9 @@ public abstract class API {
     public API(HashMap<String, Object> config) {
         this(
                 config,
-                new AsyncHttpClient(
-                        new AsyncHttpClientConfig.Builder()
+                new DefaultAsyncHttpClient(
+                        new DefaultAsyncHttpClientConfig.Builder()
+                                .setAcceptAnyCertificate(true)
                                 .setUserAgent((String) config.get("userAgent"))
                                 .build()
                 )
@@ -102,6 +103,7 @@ public abstract class API {
 
         APIResponse res = new APIResponse();
         res.req = req;
+        res.rawBody = response.getResponseBody();
         res.body = this._mapper.readValue(response.getResponseBody(), clazz);
         res.status = response.getStatusCode();
         res.headers = response.getHeaders();

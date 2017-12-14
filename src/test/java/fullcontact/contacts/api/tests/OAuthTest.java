@@ -1,12 +1,11 @@
 package fullcontact.contacts.api.tests;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.ning.http.client.Request;
 import fullcontact.contacts.api.OAuth;
 import fullcontact.contacts.api.models.Authorization;
 import fullcontact.contacts.api.responses.APIResponse;
 import org.junit.Assert;
 import org.junit.Test;
-
+import org.asynchttpclient.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
