@@ -20,6 +20,14 @@ public class Contacts extends API {
         super(config, client);
     }
 
+    /***
+     * Get a list of contacts by using a list of contact ids.
+     * @param accessToken
+     * @param contactIds
+     * @param teamId
+     * @return
+     * @throws Exception
+     */
     public APIResponse<ContactsResponseBody> get(String accessToken, List<String> contactIds, String teamId) throws Exception {
         GetContactsRequest req = new GetContactsRequest();
         req.teamId = teamId;
@@ -34,14 +42,35 @@ public class Contacts extends API {
         );
     }
 
+    /***
+     * Scrolls the user's list of contacts.
+     * @param accessToken
+     * @param teamId
+     * @return
+     * @throws Exception
+     */
     public APIResponse<ContactsResponseBody> scroll(String accessToken, String teamId) throws Exception {
         return scroll(accessToken, null, false, teamId, 100);
     }
 
+    /***
+     * Scrolls the user's list of contacts.
+     * @param accessToken
+     * @param teamId
+     * @return
+     * @throws Exception
+     */
     public APIResponse<ContactsResponseBody> scroll(String accessToken, String cursor, String teamId) throws Exception {
         return scroll(accessToken, cursor, false, teamId, 100);
     }
 
+    /***
+     * Scrolls the user's list of contacts.
+     * @param accessToken
+     * @param teamId
+     * @return
+     * @throws Exception
+     */
     public APIResponse<ContactsResponseBody> scroll(String accessToken, String cursor, Boolean includeDeleted, String teamId, Integer size) throws Exception {
         ScrollContactsRequest req = new ScrollContactsRequest();
         req.scrollCursor = cursor;
@@ -58,14 +87,38 @@ public class Contacts extends API {
         );
     }
 
+    /***
+     * Searches the user's list of contacts.
+     * @param accessToken
+     * @param query
+     * @param teamId
+     * @return
+     * @throws Exception
+     */
     public APIResponse<ContactsResponseBody> search(String accessToken, String query, String teamId) throws Exception {
         return search(accessToken, query, null, teamId, null);
     }
 
+    /***
+     * Searches the user's list of contacts.
+     * @param accessToken
+     * @param query
+     * @param teamId
+     * @return
+     * @throws Exception
+     */
     public APIResponse<ContactsResponseBody> search(String accessToken, String query, String cursor, String teamId) throws Exception {
         return search(accessToken, query, cursor, teamId, null);
     }
 
+    /***
+     * Searches the user's list of contacts.
+     * @param accessToken
+     * @param query
+     * @param teamId
+     * @return
+     * @throws Exception
+     */
     public APIResponse<ContactsResponseBody> search(String accessToken, String query, String cursor, String teamId, List<String> tagIds) throws Exception {
         SearchContactsRequest req = new SearchContactsRequest();
         req.searchCursor = cursor;
@@ -82,6 +135,14 @@ public class Contacts extends API {
         );
     }
 
+    /***
+     * Creates a new contact.
+     * @param accessToken
+     * @param contact
+     * @param teamId
+     * @return
+     * @throws Exception
+     */
     public APIResponse<ContactResponseBody> create(String accessToken, Contact contact, String teamId) throws Exception {
         CreateContactRequest req = new CreateContactRequest();
         req.contact = contact;
@@ -96,6 +157,14 @@ public class Contacts extends API {
         );
     }
 
+    /***
+     * Updates an existing contact
+     * @param accessToken
+     * @param contact
+     * @param teamId
+     * @return
+     * @throws Exception
+     */
     public APIResponse<ContactResponseBody> update(String accessToken, Contact contact, String teamId) throws Exception {
         UpdateContactRequest req = new UpdateContactRequest();
         req.contact = contact;
@@ -110,6 +179,16 @@ public class Contacts extends API {
         );
     }
 
+    /***
+     * Manages tags for a list of contactIds.
+     * @param accessToken
+     * @param contactIds
+     * @param addTagIds
+     * @param removeTagIds
+     * @param teamId
+     * @return
+     * @throws Exception
+     */
     public APIResponse<JsonNode> manageTags(String accessToken, List<String> contactIds, List<String> addTagIds, List<String> removeTagIds, String teamId) throws Exception {
         ManageTagsRequest req = new ManageTagsRequest();
         req.teamId = teamId;
@@ -126,6 +205,15 @@ public class Contacts extends API {
         );
     }
 
+    /***
+     * Deletes an existing contact.
+     * @param accessToken
+     * @param contactId
+     * @param etag
+     * @param teamId
+     * @return
+     * @throws Exception
+     */
     public APIResponse<JsonNode> delete(String accessToken, String contactId, String etag, String teamId) throws Exception {
         DeleteContactRequest req = new DeleteContactRequest();
         req.teamId = teamId;

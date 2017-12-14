@@ -14,6 +14,12 @@ public class Account extends API {
         super(config, client);
     }
 
+    /***
+     * Gets the user's account info and profile
+     * @param accessToken
+     * @return
+     * @throws Exception
+     */
     public APIResponse<fullcontact.contacts.api.models.Account> get(String accessToken) throws Exception {
         return this.request(
             fullcontact.contacts.api.models.Account.class,

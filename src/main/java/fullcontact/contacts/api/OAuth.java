@@ -16,6 +16,13 @@ public class OAuth extends API {
         super(config, client);
     }
 
+    /***
+     * Returns the URL to redirect a user to for the Authorization step of the OAuth process.
+     * @param scopes
+     * @param redirectUri
+     * @param state
+     * @return
+     */
     public String getAuthorizationUrl(List<String> scopes, String redirectUri, String state) {
         return String.format(
                 "%s/oauth/authorize?client_id=%s&scopes=%s&redirect_uri=%s&state=%s",
@@ -27,6 +34,13 @@ public class OAuth extends API {
         );
     }
 
+    /***
+     * Exchanges the code returned from a the authorization redirect for access token and refresh token.
+     * @param code
+     * @param redirectUri
+     * @return
+     * @throws Exception
+     */
     public APIResponse<Authorization> exchangeAuthCode(String code, String redirectUri) throws Exception {
         HashMap<String,String> params = new HashMap<>();
         params.put("code", code);
@@ -44,6 +58,12 @@ public class OAuth extends API {
         );
     }
 
+    /***
+     * Obtains a new access token from a refresh token.
+     * @param refreshToken
+     * @return
+     * @throws Exception
+     */
     public APIResponse<Authorization> refreshAccessToken(String refreshToken) throws Exception {
         HashMap<String,String> params = new HashMap<>();
         params.put("client_id", this._clientId);
@@ -60,6 +80,12 @@ public class OAuth extends API {
         );
     }
 
+    /***
+     * Checks if an access token is still valid
+     * @param accessToken
+     * @return
+     * @throws Exception
+     */
     public APIResponse<JsonNode> verifyAccessToken(String accessToken) throws Exception {
         HashMap<String,String> params = new HashMap<>();
         params.put("access_token", accessToken);

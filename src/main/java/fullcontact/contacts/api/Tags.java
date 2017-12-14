@@ -20,6 +20,14 @@ public class Tags extends API {
         super(config, client);
     }
 
+    /***
+     * Get a list of tags by using a list of tag ids.
+     * @param accessToken
+     * @param tagIds
+     * @param teamId
+     * @return
+     * @throws Exception
+     */
     public APIResponse<TagsResponseBody> get(String accessToken, List<String> tagIds, String teamId) throws Exception {
         GetTagsRequest req = new GetTagsRequest();
         req.teamId = teamId;
@@ -34,14 +42,35 @@ public class Tags extends API {
         );
     }
 
+    /***
+     * Scrolls a list of the user's tags.
+     * @param accessToken
+     * @param teamId
+     * @return
+     * @throws Exception
+     */
     public APIResponse<TagsResponseBody> scroll(String accessToken, String teamId) throws Exception {
         return scroll(accessToken, null, false, teamId, 100);
     }
 
+    /***
+     * Scrolls a list of the user's tags.
+     * @param accessToken
+     * @param teamId
+     * @return
+     * @throws Exception
+     */
     public APIResponse<TagsResponseBody> scroll(String accessToken, String cursor, String teamId) throws Exception {
         return scroll(accessToken, cursor, false, teamId, 100);
     }
 
+    /***
+     * Scrolls a list of the user's tags.
+     * @param accessToken
+     * @param teamId
+     * @return
+     * @throws Exception
+     */
     public APIResponse<TagsResponseBody> scroll(String accessToken, String cursor, Boolean includeDeleted, String teamId, Integer size) throws Exception {
         ScrollTagsRequest req = new ScrollTagsRequest();
         req.scrollCursor = cursor;
@@ -58,6 +87,14 @@ public class Tags extends API {
         );
     }
 
+    /***
+     * Creates a new tag.
+     * @param accessToken
+     * @param tag
+     * @param teamId
+     * @return
+     * @throws Exception
+     */
     public APIResponse<TagResponseBody> create(String accessToken, Tag tag, String teamId) throws Exception {
         CreateTagRequest req = new CreateTagRequest();
         req.tag = tag;
@@ -72,6 +109,14 @@ public class Tags extends API {
         );
     }
 
+    /***
+     * Updates an existing tag.
+     * @param accessToken
+     * @param tag
+     * @param teamId
+     * @return
+     * @throws Exception
+     */
     public APIResponse<TagResponseBody> update(String accessToken, Tag tag, String teamId) throws Exception {
         UpdateTagRequest req = new UpdateTagRequest();
         req.tag = tag;
@@ -86,6 +131,15 @@ public class Tags extends API {
         );
     }
 
+    /***
+     * Deletes an existing tag
+     * @param accessToken
+     * @param tagId
+     * @param etag
+     * @param teamId
+     * @return
+     * @throws Exception
+     */
     public APIResponse<JsonNode> delete(String accessToken, String tagId, String etag, String teamId) throws Exception {
         DeleteTagRequest req = new DeleteTagRequest();
         req.tagId = tagId;

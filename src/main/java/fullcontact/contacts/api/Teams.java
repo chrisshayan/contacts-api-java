@@ -15,6 +15,12 @@ public class Teams extends API {
         super(config, client);
     }
 
+    /***
+     * Get a list of teams that the user belongs to.
+     * @param accessToken
+     * @return
+     * @throws Exception
+     */
     public APIResponse<TeamsResponseBody> get(String accessToken) throws Exception {
         return this.request(
                 TeamsResponseBody.class,
